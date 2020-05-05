@@ -288,5 +288,15 @@ class User extends ActiveRecord implements IdentityInterface
         $ids = $redis->sinter($key1, $key2);
         return User::find()->select('id, username, nickname')->where(['id' => $ids])->orderBy('username')->asArray()->all();
     }
+    /**
+     * Get profile picture
+     * @return string
+     */
+    public function getPicture()
+    {
+        if($this->picture){
+            return Yii::$app->storage->getFile($this->picture);
+        }
+    }
    
 }
