@@ -4,6 +4,7 @@ namespace frontend\modules\post\controllers;
 
 use Yii;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use frontend\models\Post;
@@ -41,12 +42,56 @@ class DefaultController extends Controller
     
     public function actionView($id)
     {
+        $currentUser = Yii::$app->user->identity;
         
         return $this->render('view', [
             'post' => $this->findPost($id),
+            'currentUser' => $currentUser,
         ]);
     }
     
+    public function actionLike(){
+        
+        if(Yii::$app->user->isGuest){
+            return $this->redirect(['/user/default/login']);
+        }
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        $id = Yii::$app->request->post('id');
+        $post = $this->findPost($id);
+        
+        $currentUser = Yii::$app->user->identity;
+        
+        $post->like($currentUser);
+        
+        return [
+            'success' => true,
+            'likesCount' => $post->countLikes(),
+        ];
+    }
+
+        public function actionUnlike(){
+        
+        if(Yii::$app->user->isGuest){
+            return $this->redirect(['/user/default/login']);
+        }
+        
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        
+        $id = Yii::$app->request->post('id');
+        $post = $this->findPost($id);
+        
+        $currentUser = Yii::$app->user->identity;
+        
+        $post->unLike($currentUser);
+        
+        return [
+            'success' => true,
+            'likesCount' => $post->countLikes(),            
+        ];
+    }
+
     public function findPost($id)
     {
         if($user = Post::findOne($id)){
