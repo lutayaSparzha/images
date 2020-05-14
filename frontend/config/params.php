@@ -9,4 +9,10 @@ return [
         'maxWidth' => 800,
         'maxHeight' => 600,
     ],
+    'postPicture' => [
+        'maxWidth' => 1024,
+        'maxHeight' => 768,
+    ],
+    
+    'feedPostLimit' => 200,    
 ];
