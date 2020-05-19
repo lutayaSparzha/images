@@ -327,13 +327,32 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Check whether current user likes post with given id
      * @param integer $postId
-     * $return boolean
+     * @return boolean
      */
     public function likesPost(int $postId)
     {
         /* $var $redis Connection*/
         $redis = Yii::$app->redis;
         return(bool) $redis->sismember("user:{$this->getId()}:likes", $postId);
+    }
+    
+    /**
+     * Get post count
+     * @return integer
+     */
+    public function getPostCount()
+    {
+        return $this->hasMany(Post::class, ['user_id' => 'id'])->count();
+    }
+    
+    /**
+     * Get post count
+     * @return integer
+     */
+    public function getPosts()
+    {
+        $order = ['create_at' => SORT_DESC];
+        return $this->hasMany(Post::class, ['user_id' => 'id'])->orderBy($order)->all();
     }
    
 }
