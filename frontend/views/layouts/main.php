@@ -101,7 +101,7 @@ echo Nav::widget([
                 <div class="back-to-top-page">
                     <a class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
                 </div>
-                <p class="text">Images | 2020</p>
+                <p class="text"><a href="<?php echo Url::to(['/site/about']); ?>">Images | 2020</a></p>
             </div>
         </footer>
 

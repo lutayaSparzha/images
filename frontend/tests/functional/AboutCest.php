@@ -1,13 +1,15 @@
-<?php
-namespace frontend\tests\functional;
+<?php namespace frontend\tests\functional;
 
 use frontend\tests\FunctionalTester;
 
 class AboutCest
 {
+
+
+    // tests
     public function checkAbout(FunctionalTester $I)
     {
         $I->amOnRoute('site/about');
-        $I->see('About', 'h1');
+        $I->see('About images project', 'h1');
     }
 }
