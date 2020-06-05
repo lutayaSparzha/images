@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 use yii\helpers\Url;
+use Yii;
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">

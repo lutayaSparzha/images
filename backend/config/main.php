@@ -13,7 +13,10 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
         'complaints' => [
-            'class' => 'backend\modules\complaints\Module',
+            'class' => 'backend\modules\complaints\Module',           
+        ],
+        'user' => [
+            'class' => 'backend\modules\user\Module',
         ],
     ],
     'components' => [
